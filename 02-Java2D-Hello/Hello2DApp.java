@@ -1,7 +1,7 @@
 /* 
     ok a. altere as cores de fundo e dos gráficos
-       b. adicione alguma outra primitiva gráfica (retângulo, elipse, imagem, etc)
-       c. alguma outra modificação usando a sua criativide
+    ok b. adicione alguma outra primitiva gráfica (retângulo, elipse, imagem, etc)
+    ok c. alguma outra modificação usando a sua criativide
 */
 
 import java.awt.*;
