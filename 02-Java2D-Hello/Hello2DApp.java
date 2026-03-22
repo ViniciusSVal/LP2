@@ -33,9 +33,9 @@ class Hello2DFrame extends JFrame {
 	super.paint(g);
 
 	// iniciando o contexto grafico e variaveis auxiliares 
-        Graphics2D g2d = (Graphics2D) g; 	
+	Graphics2D g2d = (Graphics2D) g; 	
 	int w = getWidth();
-        int h = getHeight();
+    int h = getHeight();
 	int SPACE = 20; 	// espaço das bordas para o losango
 	final int BAR = 25; 	// altura da barra superior do aplicativo (pelo menos na minha maquina)
 
@@ -47,10 +47,10 @@ class Hello2DFrame extends JFrame {
 	h -= BAR;
 	
 	// c) desenhando um poligono um pouco mais complexo
-	int pointxs[] = {w/2, 		w -SPACE, 	w/2,		0 +SPACE};
+	int pointxs[] = {w/2, 			w -SPACE, 	w/2,			0 +SPACE};
 	int pointys[] = {0 +BAR+SPACE,	h/2 +BAR, 	h +BAR-SPACE, 	h/2 +BAR};
 
-       	g2d.setPaint(Color.yellow);	
+	g2d.setPaint(Color.yellow);	
 	g2d.fillPolygon(pointxs, pointys, pointxs.length);
 
 	// b) desenhando primitivas graficas
