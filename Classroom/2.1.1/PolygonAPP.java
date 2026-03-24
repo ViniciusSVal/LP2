@@ -37,7 +37,7 @@ class Polygon extends Figure {
 
         //método print
         void print () {
-                        System.out.printf("center pos: (%.1f, %.1f)\nwidth: %.1f\nheight: %.1f\ncorners: %d\nrounded: %.1f\n", 
+                        System.out.printf("pos: (%.1f, %.1f)\nwidth: %.1f\nheight: %.1f\ncorners: %d\nrounded: %.1f\n", 
                         this.pos[0], this.pos[1],
                         this.width, this.height,        
                         this.corners, this.rounded);
