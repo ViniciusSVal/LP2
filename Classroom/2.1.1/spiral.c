@@ -1,10 +1,9 @@
 #include <stdio.h>
 
 typedef struct {
-        float pos[2];
+        float x, y;
 
-        float width;
-        float height;
+        float width, height;
 
         float turns;
         float innerRadius;
@@ -12,7 +11,7 @@ typedef struct {
 
 void spiralPrint (Spiral s) {
         printf("pos: (%.1f, %.1f)\nwidth: %.1f\nheight: %.1f\nturns: %.1f\nInnerRadius: %.1f\n",
-                s.pos[0], s.pos[1],
+                s.x, s.y,
                 s.width, s.height,
                 s.turns, s.innerRadius
                 );
