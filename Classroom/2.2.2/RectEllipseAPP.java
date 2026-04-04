@@ -49,7 +49,7 @@ class Frame extends JFrame {
 				}
 			}
 		);
-		this.setTitle("Retangulos");
+		this.setTitle("Retangulos e Elipses");
 		this.setSize(600, 400);
 		this.setVisible(true);
 	}
