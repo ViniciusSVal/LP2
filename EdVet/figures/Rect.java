@@ -7,10 +7,10 @@ import javax.swing.*;
 //import Figure;
 
 public class Rect extends Figure {
-	private int x, y; // pos
-	private int w, h; // dim
+	//private int x, y; // pos
+	//private int w, h; // dim
 	
-	private Color lineColor; 	// cor de contorno
+	//private Color lineColor; 	// cor de contorno
 	private Color bgColor; 		// cor de fundo
 
 	public Rect (int x, int y, int w, int h, Color line, Color bg) {
@@ -45,9 +45,7 @@ public class Rect extends Figure {
 				this.w, this.h, this.area(), this.x, this.y);
 	}
 
-	public void paint (Graphics g) {
-		Graphics2D g2d = (Graphics2D) g;
-
+	public void paint (Graphics2D g2d) {
 		//desenhando o fundo
 		g2d.setPaint(this.bgColor);
 		g2d.fillRect(this.x, this.y, this.w, this.h);

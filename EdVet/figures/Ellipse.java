@@ -4,11 +4,11 @@ import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 
-public class Ellipse {
-	private int x, y;
-	private int w, h;
+public class Ellipse extends Figure {
+	//private int x, y;
+	//private int w, h;
 
-	private Color lineColor;
+	//private Color lineColor;
 	private Color bgColor;
 
 	public Ellipse (int x, int y, int w, int h, Color line, Color bg) {
@@ -25,9 +25,7 @@ public class Ellipse {
 				this.w, this.h, this.x, this.y);
 	}
 
-	public void paint (Graphics g) {
-		Graphics2D g2d = (Graphics2D) g;
-
+	public void paint (Graphics2D g2d) {
 		//desenhando o fundo
 		g2d.setPaint(this.bgColor);
 		g2d.fillOval(this.x, this.y, this.w, this.h);

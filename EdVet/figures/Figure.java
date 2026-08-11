@@ -1,9 +1,11 @@
 package figures;
 
-public class Figure {
-	int cor;
-}
+import java.awt.Color;
+import java.awt.Graphics2D;
 
-class Figure2 extends Figure{
-	int cores;
+public abstract class Figure {
+	protected int x,y, w,h;
+	protected Color lineColor;
+	
+	public abstract void paint(Graphics2D g2d);
 }
