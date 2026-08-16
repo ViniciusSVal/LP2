@@ -7,5 +7,6 @@ public abstract class Figure {
 	protected int x,y, w,h;
 	protected Color lineColor;
 	
+	public abstract void drag(int dx, int dy);
 	public abstract void paint(Graphics2D g2d);
 }

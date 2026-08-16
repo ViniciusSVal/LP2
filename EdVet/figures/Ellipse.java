@@ -19,6 +19,20 @@ public class Ellipse extends Figure {
 		this.lineColor = line;
 		this.bgColor = bg;
 	}
+	
+	public boolean pointInArea (int x, int y) {
+		if ((this.x < x) && (x < this.x + this.w) && 
+		    (this.y < y) && (y < this.y + this.h)) {
+			return true;
+		}
+		
+		return false;
+	}
+	
+	public void drag (int dx, int dy) {
+		this.x += dx;
+		this.y += dy;
+	} 
 
 	public void print () {
 		System.out.printf("Elipse de dimensoes W = %d e H = %d na posiçao (%d, %d)\n", 

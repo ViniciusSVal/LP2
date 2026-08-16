@@ -18,11 +18,20 @@ public class Line extends Figure {
 		this.lineColor = line;
 	}
 
-	public void drag (int dx1, int dy1, int dx2, int dy2) {
-		this.x += dx1;
-		this.y += dy1;
-		this.w += dx2;
-		this.h += dy2;
+	public boolean pointInArea (int x, int y) {
+		if ((this.x < x) && (x < this.x + this.w) &&
+		    (this.y < y) && (y < this.y + this.h)) {
+			return true;
+		}
+		
+		return false;
+	}
+	
+	public void drag (int dx, int dy) {
+		this.x += dx;
+		this.y += dy;
+		this.w += dx;
+		this.h += dy;
 	}
 
 	public void print () {

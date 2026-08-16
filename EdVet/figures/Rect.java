@@ -35,6 +35,14 @@ public class Rect extends Figure {
 		return this.w * this.h;
 	}
 
+	public boolean pointInArea (int x, int y) {
+		if ((this.x < x) && (x < this.x + this.w) &&
+		    (this.y < y) && (y < this.y + this.h)) {
+			return true;
+		}
+		
+		return false;
+	}
 	public void drag (int dx, int dy) {
 		this.x += dx;
 		this.y += dy;
