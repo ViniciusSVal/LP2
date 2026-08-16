@@ -79,7 +79,7 @@ class Frame extends JFrame {
 			public void keyTyped (KeyEvent e) {
 				char key = e.getKeyChar();
 
-				// DEBUG empurrando o quadrado sempre que eu aperto A
+				// DEBUG: empurrando a ultima figura sempre que eu aperto A
 				if (key == 'a') {
 					//rects[2].drag(1, 1);
 					figs.get(figs.size()-1).drag(1, 1);
