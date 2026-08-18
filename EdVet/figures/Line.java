@@ -17,8 +17,13 @@ public class Line extends Figure {
 		this.h = y2;
 		this.lineColor = line;
 	}
+	public Line (int x1, int y1, int x2, int y2) {
+		this(x1, y1, x2, y2, new Color(0,0,0));
+	}
 
 	public boolean pointInArea (int x, int y) {
+		//if (this.x > x || x > this.w)
+
 		if ((this.x < x) && (x < this.x + this.w) &&
 		    (this.y < y) && (y < this.y + this.h)) {
 			return true;

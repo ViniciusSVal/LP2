@@ -8,8 +8,8 @@ public class Ellipse extends Figure {
 	//private int x, y;
 	//private int w, h;
 
-	//private Color lineColor;
-	private Color bgColor;
+	//procteced Color lineColor;
+	//protected Color bgColor;
 
 	public Ellipse (int x, int y, int w, int h, Color line, Color bg) {
 		this.x = x;
@@ -19,32 +19,25 @@ public class Ellipse extends Figure {
 		this.lineColor = line;
 		this.bgColor = bg;
 	}
-	
-	public boolean pointInArea (int x, int y) {
-		if ((this.x < x) && (x < this.x + this.w) && 
-		    (this.y < y) && (y < this.y + this.h)) {
-			return true;
-		}
-		
-		return false;
+	public Ellipse (int x, int y, int w, int h) {
+		this(x, y, w, h, new Color(0,0,0), new Color(255, 255, 255));
 	}
 	
+	public boolean pointInArea (int x, int y) {
+		return this.pointInRect(x, y);
+	}
+
 	public void drag (int dx, int dy) {
 		this.x += dx;
 		this.y += dy;
 	} 
-
-	public void print () {
-		System.out.printf("Elipse de dimensoes W = %d e H = %d na posiçao (%d, %d)\n", 
-				this.w, this.h, this.x, this.y);
-	}
 
 	public void paint (Graphics2D g2d) {
 		//desenhando o fundo
 		g2d.setPaint(this.bgColor);
 		g2d.fillOval(this.x, this.y, this.w, this.h);
 
-		//desenhando o contorno
+		//desenhando o conto'rno
 		g2d.setPaint(this.lineColor);
 		g2d.drawOval(this.x, this.y, this.w, this.h);
 	}

@@ -66,6 +66,9 @@ class Frame extends JFrame {
 	//Ellipse[] ellips = new Ellipse[3];
 	//Line[] lines = new Line[3];
 
+	int mouseX, mouseY;
+	Figure figFocused;
+
 	Frame() {
 		this.addWindowListener (
 			new WindowAdapter() {
@@ -87,33 +90,28 @@ class Frame extends JFrame {
 				else if (key == 'r') {
 					Random rand = new Random();
 					figs.add(new Rect(
-						rand.nextInt(600),
-						rand.nextInt(400),
-						rand.nextInt(200),
-						rand.nextInt(200),	
-						new Color(0,0,0),
-						new Color(0,0,0)	
+						mouseX,
+						mouseY,
+						100,
+						75
 					));
 				}
 				else if (key == 'e') {
 					Random rand = new Random();
 					figs.add(new Ellipse(
-						rand.nextInt(600),
-						rand.nextInt(400),
-						rand.nextInt(200),
-						rand.nextInt(200),	
-						new Color(0,0,0),
-						new Color(0,0,0)	
+						mouseX,
+						mouseY,
+						100,
+						75
 					));
 				}
 				else if (key == 'l') {
 					Random rand = new Random();
 					figs.add(new Line(
-						rand.nextInt(600),
-						rand.nextInt(400),
-						rand.nextInt(200),
-						rand.nextInt(200),	
-						new Color(0,0,0)
+						mouseX,
+						mouseY,
+						mouseX + 100,
+						mouseY + 75
 					));		
 				}
 
@@ -121,22 +119,36 @@ class Frame extends JFrame {
 			}
 		});
 		this.addMouseListener ( new MouseAdapter() {
-			public void mouseClicked (MouseEvent e) {
-				Color col;
-				switch (e.getButton()) {
-					case 1:  col = new Color(255,0,0); break;
-					case 2:  col = new Color(0,255,0); break;
-					case 3:  col = new Color(0,0,255); break;
-					default: col = new Color(0,0,0);
-				}
-				
-				//rects[2] ...
-				figs.add(new Rect(e.getX(), e.getY(), 20, 20, new Color(0,0,0), col));
-				
-				repaint();
+			public void mousePressed (MouseEvent e) {
+				if (e.getButton() == 1) {
+					figFocused = null;
+					for (Figure fig : figs) {
+						if (fig == null) return;
+						if (fig.pointInArea(mouseX, mouseY)) 
+							figFocused = fig;
+					}
+					//figFocused.setColor(new Color(255, 0, 0));
+				}	
+			}
+		});
+		this.addMouseMotionListener( new MouseMotionAdapter() {
+			public void mouseMoved(MouseEvent e) {
+				mouseX = e.getX();
+				mouseY = e.getY();
 			}
 			public void mouseDragged (MouseEvent e) {
-				//for (fig )
+				if (figFocused == null) return;
+				
+				int dx, dy; 
+			       	dx = e.getX() - mouseX;
+				dy = e.getY() - mouseY;	
+
+				figFocused.drag(dx, dy);
+
+				mouseX = e.getX();
+				mouseY = e.getY();
+
+				repaint();
 			}
 		});
 
