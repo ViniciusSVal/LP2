@@ -11,14 +11,17 @@ public class Line extends Figure {
 	//private Color lineColor; 	// cor de "contorno"
 
 	public Line (int x1, int y1, int x2, int y2, Color line) {
-		this.x = x1;
-		this.y = y1;
-		this.w = x2;
-		this.h = y2;
-		this.lineColor = line;
+		super(x1, y1, x2, y2, line, Color.BLACK);
+		
+		
+		//this.x = x1;
+		//this.y = y1;
+		//this.w = x2;
+		//this.h = y2;
+		//this.lineColor = line;
 	}
 	public Line (int x1, int y1, int x2, int y2) {
-		this(x1, y1, x2, y2, new Color(0,0,0));
+		super(x1, y1, x2, y2, Color.BLACK, Color.BLACK);
 	}
 
 	public boolean pointInArea (int x, int y) {

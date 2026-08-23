@@ -10,19 +10,14 @@ public class Rect extends Figure {
 	//private int w, h; // dim
 	
 	//private Color lineColor; 	// cor de contorno
-	//private Color bgColor; 		// cor de fundo
+	//private Color bgColor; 	// cor de fundo
 
 	public Rect (int x, int y, int w, int h, Color line, Color bg) {
-		this.x = x;
-		this.y = y;
-		this.w = w;
-		this.h = h;
-		this.lineColor = line;
-		this.bgColor = bg;
+		super(x, y, w, h, line, bg);
 	}
 	
 	public Rect (int x, int y, int w, int h) {
-		this(x, y, w, h, new Color(0,0,0), new Color(255, 255, 255));
+		super(x, y, w, h, Color.BLACK, Color.WHITE);
 	}
 
 	public boolean pointInArea (int x, int y) {

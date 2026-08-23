@@ -7,7 +7,14 @@ public abstract class Figure {
 	protected int x,y, w,h;
 	protected Color lineColor;
 	protected Color bgColor;
-		
+	
+	protected Figure (int x, int y, int w, int h, Color line, Color bg) {
+		this.x = x; this.y = y;
+		this.w = w; this.h = h;
+		this.lineColor = line;
+		this.bgColor = bg;
+	}
+
 	protected boolean pointInRect(int x, int y) {
 		if ((this.x < x) && (x < this.x + this.w) &&
 		    (this.y < y) && (y < this.y + this.h)) {

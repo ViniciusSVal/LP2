@@ -12,15 +12,17 @@ public class Ellipse extends Figure {
 	//protected Color bgColor;
 
 	public Ellipse (int x, int y, int w, int h, Color line, Color bg) {
-		this.x = x;
-		this.y = y;
-		this.w = w;
-		this.h = h;
-		this.lineColor = line;
-		this.bgColor = bg;
+		super(x, y, w, h, line, bg);
+
+		//this.x = x;
+		//this.y = y;
+		//this.w = w;
+		//this.h = h;
+		//this.lineColor = line;
+		//this.bgColor = bg;
 	}
 	public Ellipse (int x, int y, int w, int h) {
-		this(x, y, w, h, new Color(0,0,0), new Color(255, 255, 255));
+		super(x, y, w, h, Color.BLACK, Color.WHITE);
 	}
 	
 	public boolean pointInArea (int x, int y) {

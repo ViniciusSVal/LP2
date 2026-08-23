@@ -5,7 +5,6 @@ import java.util.Random;
 import java.util.ArrayList;
 
 import figures.*;
-//import figures.*.*;
 
 public class EdVetAPP {
 	public static void main (String[] args) {
@@ -30,7 +29,7 @@ class Frame extends JFrame {
 			}
 		);
 		this.addKeyListener ( new KeyAdapter() {
-			public void keyTyped (KeyEvent e) {
+			public void keyPressed (KeyEvent e) {
 				char key = e.getKeyChar();
 
 				switch (key) {
@@ -60,9 +59,15 @@ class Frame extends JFrame {
 							mouseY,
 							mouseX + 100,
 							mouseY + 75
-						));		
+						));
+						break;
+					case '\b': //delete
+						if (figFocused != null) {
+							figs.remove(figFocused);
+							figFocused = null;
+						}
 				}
-
+				
 				repaint();
 			}
 		});
