@@ -97,7 +97,7 @@ class Frame extends JFrame {
 				if (figFocused == null) return;
 				
 				int dx, dy; 
-			       	dx = e.getX() - mouseX;
+				dx = e.getX() - mouseX;
 				dy = e.getY() - mouseY;	
 
 				figFocused.drag(dx, dy);
