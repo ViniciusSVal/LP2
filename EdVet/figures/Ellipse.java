@@ -13,13 +13,6 @@ public class Ellipse extends Figure {
 
 	public Ellipse (int x, int y, int w, int h, Color line, Color bg) {
 		super(x, y, w, h, line, bg);
-
-		//this.x = x;
-		//this.y = y;
-		//this.w = w;
-		//this.h = h;
-		//this.lineColor = line;
-		//this.bgColor = bg;
 	}
 	public Ellipse (int x, int y, int w, int h) {
 		super(x, y, w, h, Color.BLACK, Color.WHITE);
@@ -28,11 +21,6 @@ public class Ellipse extends Figure {
 	public boolean pointInArea (int x, int y) {
 		return this.pointInRect(x, y);
 	}
-
-	public void drag (int dx, int dy) {
-		this.x += dx;
-		this.y += dy;
-	} 
 
 	public void paint (Graphics2D g2d) {
 		//desenhando o fundo
@@ -43,4 +31,10 @@ public class Ellipse extends Figure {
 		g2d.setPaint(this.lineColor);
 		g2d.drawOval(this.x, this.y, this.w, this.h);
 	}
+	public void paintFocus (Graphics2D g2d) {
+		g2d.setPaint(Color.RED);
+		g2d.drawOval(this.x+1, this.y+1, this.w-2, this.h-2);
+		g2d.drawOval(this.x-1, this.y-1, this.w+2, this.h+2);
+	}
+
 }

@@ -23,10 +23,6 @@ public class Rect extends Figure {
 	public boolean pointInArea (int x, int y) {
 		return this.pointInRect(x, y);
 	}
-	public void drag (int dx, int dy) {
-		this.x += dx;
-		this.y += dy;
-	}
 
 	public void paint (Graphics2D g2d) {
 		//desenhando o fundo
@@ -36,5 +32,10 @@ public class Rect extends Figure {
 		//desenhando o contorno
 		g2d.setPaint(this.lineColor);
 		g2d.drawRect(this.x, this.y, this.w, this.h);
+	}
+	public void paintFocus (Graphics2D g2d) {
+		g2d.setPaint(Color.RED);
+		g2d.drawRect(this.x+1, this.y+1, this.w-2, this.h-2);
+		g2d.drawRect(this.x-1, this.y-1, this.w+2, this.h+2);
 	}
 }

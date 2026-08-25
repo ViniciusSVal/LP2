@@ -17,6 +17,7 @@ class Frame extends JFrame {
 	ArrayList<Figure> figs = new ArrayList<Figure>();
 
 	int mouseX, mouseY;
+	int mouseButton;
 	Figure figFocused;
 
 	Frame() {
@@ -30,14 +31,18 @@ class Frame extends JFrame {
 		);
 		this.addKeyListener ( new KeyAdapter() {
 			public void keyPressed (KeyEvent e) {
-				char key = e.getKeyChar();
+				int key = e.getKeyCode();
 
 				switch (key) {
-					case 'a': // DEBUG: empurrando a ultima figura sempre que eu aperto A
-						//rects[2].drag(1, 1);
-						figs.get(figs.size()-1).drag(1, 1);
-						break;
-					case 'r':
+					case KeyEvent.VK_UP: 
+						figs.get(figs.size()-1).drag(0, -5); break;
+					case KeyEvent.VK_DOWN: 
+						figs.get(figs.size()-1).drag(0, 5); break;
+					case KeyEvent.VK_LEFT: 
+						figs.get(figs.size()-1).drag(-5, 0); break;
+					case KeyEvent.VK_RIGHT: 
+						figs.get(figs.size()-1).drag(5, 0); break;
+					case KeyEvent.VK_R:
 						figs.add(new Rect(
 							mouseX,
 							mouseY,
@@ -45,7 +50,7 @@ class Frame extends JFrame {
 							75
 						));
 						break;
-					case 'e': 
+					case KeyEvent.VK_E: 
 						figs.add(new Ellipse(
 							mouseX,
 							mouseY,
@@ -53,15 +58,15 @@ class Frame extends JFrame {
 							75
 						));
 						break;
-					case 'l': 
+					case KeyEvent.VK_L: 
 						figs.add(new Line(
 							mouseX,
 							mouseY,
-							mouseX + 100,
-							mouseY + 75
+							100,
+							75
 						));
 						break;
-					case '\b': //delete
+					case KeyEvent.VK_BACK_SPACE: //delete
 						if (figFocused != null) {
 							figs.remove(figFocused);
 							figFocused = null;
@@ -73,16 +78,17 @@ class Frame extends JFrame {
 		});
 		this.addMouseListener ( new MouseAdapter() {
 			public void mousePressed (MouseEvent e) {
-				if (e.getButton() == 1) {
-					figFocused = null;
-					for (Figure fig : figs) {
-						if (fig == null) return;
-						if (fig.pointInArea(mouseX, mouseY)) 
-							figFocused = fig;
-					}
-					/// projetando indicar quem é a figura focada
-					//figFocused.setColor(new Color(255, 0, 0));
-				}	
+				mouseButton = e.getButton();
+				
+				if (mouseButton == MouseEvent.BUTTON2) return; 
+				
+				figFocused = null;
+				for (Figure fig : figs) {
+					if (fig == null) return;
+					if (fig.pointInArea(mouseX, mouseY))
+						figFocused = fig;
+				}
+				repaint();
 			}
 		});
 		this.addMouseMotionListener( new MouseMotionAdapter() {
@@ -96,16 +102,25 @@ class Frame extends JFrame {
 
 				if (figFocused == null) return;
 				
-				int dx, dy; 
+				int dx, dy;
 				dx = e.getX() - mouseX;
 				dy = e.getY() - mouseY;	
-
-				figFocused.drag(dx, dy);
+				
+				switch (mouseButton) {
+					case MouseEvent.BUTTON1: // MOVER FIGURA
+						figFocused.drag(dx, dy);
+						break;
+					case MouseEvent.BUTTON3: // REDIMENSIONAR FIGURA
+						figFocused.redim(dx, dy); 
+						break;
+					case MouseEvent.BUTTON2:
+						System.out.printf("oi?");
+				}
 
 				//atualizando a posição salva do mouse
 				mouseX = e.getX();
 				mouseY = e.getY();
-
+				
 				repaint();
 			}
 		});
@@ -120,5 +135,7 @@ class Frame extends JFrame {
 		Graphics2D g2d = (Graphics2D) g;
 
 		for (Figure fig : figs) fig.paint(g2d);
+		
+		if (figFocused != null) figFocused.paintFocus(g2d);
 	}
 }
