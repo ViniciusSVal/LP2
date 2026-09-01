@@ -1,13 +1,13 @@
 package figures;
 
-import java.awt.Color;
-import java.awt.Graphics2D;
+import java.awt.*;
+import javax.swing.JFrame;
 
 public abstract class Figure {
 	protected int x,y, w,h;
 	protected Color lineColor;
-	protected Color bgColor;
-	
+	public Color bgColor;
+
 	protected Figure (int x, int y, int w, int h, Color line, Color bg) {
 		this.x = x; this.y = y;
 		this.w = w; this.h = h;
@@ -32,7 +32,9 @@ public abstract class Figure {
 		
 		return false;
 	}
+
 	public abstract boolean pointInArea(int x, int y);	
+	public abstract void changeColor(JFrame frame);
 	public abstract void paint(Graphics2D g2d);
 	public abstract void paintFocus(Graphics2D g2d);
 }

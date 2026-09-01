@@ -34,7 +34,7 @@ class Frame extends JFrame {
 				int key = e.getKeyCode();
 
 				switch (key) {
-					case KeyEvent.VK_UP: 
+					case KeyEvent.VK_UP: //mover com as setas 
 						figs.get(figs.size()-1).drag(0, -5); break;
 					case KeyEvent.VK_DOWN: 
 						figs.get(figs.size()-1).drag(0, 5); break;
@@ -66,6 +66,9 @@ class Frame extends JFrame {
 							75
 						));
 						break;
+					case KeyEvent.VK_C:
+						figFocused.changeColor(Frame.this);
+						break;
 					case KeyEvent.VK_BACK_SPACE: //delete
 						if (figFocused != null) {
 							figs.remove(figFocused);
@@ -73,7 +76,7 @@ class Frame extends JFrame {
 						}
 				}
 				
-				repaint();
+				repaint();	
 			}
 		});
 		this.addMouseListener ( new MouseAdapter() {
@@ -113,8 +116,6 @@ class Frame extends JFrame {
 					case MouseEvent.BUTTON3: // REDIMENSIONAR FIGURA
 						figFocused.redim(dx, dy); 
 						break;
-					case MouseEvent.BUTTON2:
-						System.out.printf("oi?");
 				}
 
 				//atualizando a posição salva do mouse

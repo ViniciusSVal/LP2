@@ -5,13 +5,6 @@ import java.awt.event.*;
 import javax.swing.*;
 
 public class Rect extends Figure {
-	// herdadas da classe Figure:
-	//private int x, y; // pos
-	//private int w, h; // dim
-	
-	//private Color lineColor; 	// cor de contorno
-	//private Color bgColor; 	// cor de fundo
-
 	public Rect (int x, int y, int w, int h, Color line, Color bg) {
 		super(x, y, w, h, line, bg);
 	}
@@ -24,6 +17,21 @@ public class Rect extends Figure {
 		return this.pointInRect(x, y);
 	}
 
+	public void changeColor (JFrame frame) {
+		// trocando contorno
+		String s = JOptionPane.showInputDialog(frame,
+				"Cor de contorno",
+				JOptionPane.QUESTION_MESSAGE);
+		int hex = Integer.parseInt(s, 16);
+		this.lineColor = new Color(hex);
+		
+		// trocando background
+		s = JOptionPane.showInputDialog(frame,
+				"Cor de fundo",
+				JOptionPane.QUESTION_MESSAGE);
+		hex = Integer.parseInt(s, 16);	
+		this.bgColor = new Color(hex);
+	}
 	public void paint (Graphics2D g2d) {
 		//desenhando o fundo
 		g2d.setPaint(this.bgColor);
