@@ -12,11 +12,11 @@ public class Line extends Figure {
 	
 	//private Color lineColor; 	// cor de "contorno"
 
-	public Line (int x1, int y1, int x2, int y2, Color line) {
-		super(x1, y1, x2, y2, line, Color.BLACK);
+	public Line (int x1, int y1, int x2, int y2, Color line, int depth) {
+		super(x1, y1, x2, y2, line, Color.BLACK, depth);
 	}
-	public Line (int x1, int y1, int x2, int y2) {
-		super(x1, y1, x2, y2, Color.BLACK, Color.BLACK);
+	public Line (int x1, int y1, int x2, int y2, int depth) {
+		super(x1, y1, x2, y2, Color.BLACK, Color.BLACK, depth);
 	}
 
 	public boolean pointInArea (int x, int y) {
@@ -33,9 +33,14 @@ public class Line extends Figure {
 
 	public void changeColor(JFrame frame) {
 		// trocando contorno
-		String s = JOptionPane.showInputDialog(frame,
-				"Cor de contorno",
-				JOptionPane.QUESTION_MESSAGE);
+		String s = JOptionPane.showInputDialog(
+			frame,
+			"Cor de contorno",
+			"000000"
+		);
+		
+		if (s == null) return;
+		
 		int hex = Integer.parseInt(s, 16);
 		this.lineColor = new Color(hex);
 	}

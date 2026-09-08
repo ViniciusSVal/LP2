@@ -5,14 +5,16 @@ import javax.swing.JFrame;
 
 public abstract class Figure {
 	protected int x,y, w,h;
+	protected int depth;
 	protected Color lineColor;
-	public Color bgColor;
+	protected Color bgColor;
 
-	protected Figure (int x, int y, int w, int h, Color line, Color bg) {
+	protected Figure (int x, int y, int w, int h, Color line, Color bg, int depth) {
 		this.x = x; this.y = y;
 		this.w = w; this.h = h;
 		this.lineColor = line;
 		this.bgColor = bg;
+		this.depth = depth;
 	}
 
 	public void drag(int dx, int dy) {
@@ -23,8 +25,15 @@ public abstract class Figure {
 		this.w += dw;
 		this.h += dh;
 	}
+	
+	public int getDepth () {
+		return this.depth;
+	}
+	public void setDepth (int depth) {
+		this.depth = depth;
+	}
 
-	protected boolean pointInRect(int x, int y) {
+	protected boolean pointInRect (int x, int y) {
 		if ((this.x < x) && (x < this.x + this.w) &&
 		    (this.y < y) && (y < this.y + this.h)) {
 			return true;

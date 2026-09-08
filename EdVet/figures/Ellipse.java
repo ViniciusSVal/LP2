@@ -11,11 +11,11 @@ public class Ellipse extends Figure {
 	//procteced Color lineColor;
 	//protected Color bgColor;
 
-	public Ellipse (int x, int y, int w, int h, Color line, Color bg) {
-		super(x, y, w, h, line, bg);
+	public Ellipse (int x, int y, int w, int h, Color line, Color bg, int depth) {
+		super(x, y, w, h, line, bg, depth);
 	}
-	public Ellipse (int x, int y, int w, int h) {
-		super(x, y, w, h, Color.BLACK, Color.WHITE);
+	public Ellipse (int x, int y, int w, int h, int depth) {
+		super(x, y, w, h, Color.BLACK, Color.WHITE, depth);
 	}
 	
 	public boolean pointInArea (int x, int y) {
@@ -24,16 +24,26 @@ public class Ellipse extends Figure {
 	
 	public void changeColor(JFrame frame) {	
 		// trocando contorno
-		String s = JOptionPane.showInputDialog(frame,
-				"Cor de contorno",
-				JOptionPane.QUESTION_MESSAGE);
+		String s = JOptionPane.showInputDialog(
+			frame,
+			"Cor de contorno",
+			"000000"
+		);
+		
+		if (s == null) return;
+		
 		int hex = Integer.parseInt(s, 16);
 		this.lineColor = new Color(hex);
 		
 		// trocando background
-		s = JOptionPane.showInputDialog(frame,
-				"Cor de fundo",
-				JOptionPane.QUESTION_MESSAGE);
+		s = JOptionPane.showInputDialog(
+			frame,
+			"Cor de fundo",
+			"ffffff"
+		);
+
+		if (s == null) return;
+
 		hex = Integer.parseInt(s, 16);	
 		this.bgColor = new Color(hex);
 	}
