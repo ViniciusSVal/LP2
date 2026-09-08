@@ -5,17 +5,11 @@ import java.awt.event.*;
 import javax.swing.*;
 
 public class Ellipse extends Figure {
-	//private int x, y;
-	//private int w, h;
-
-	//procteced Color lineColor;
-	//protected Color bgColor;
-
-	public Ellipse (int x, int y, int w, int h, Color line, Color bg, int depth) {
-		super(x, y, w, h, line, bg, depth);
+	public Ellipse (int x, int y, int w, int h, Color line, Color bg) {
+		super(x, y, w, h, line, bg);
 	}
-	public Ellipse (int x, int y, int w, int h, int depth) {
-		super(x, y, w, h, Color.BLACK, Color.WHITE, depth);
+	public Ellipse (int x, int y, int w, int h) {
+		super(x, y, w, h, Color.BLACK, Color.WHITE);
 	}
 	
 	public boolean pointInArea (int x, int y) {
@@ -62,4 +56,5 @@ public class Ellipse extends Figure {
 		g2d.drawOval(this.x-1, this.y-1, this.w+2, this.h+2);
 	}
 
+	public void rightClick() {};
 }

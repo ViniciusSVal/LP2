@@ -5,12 +5,12 @@ import java.awt.event.*;
 import javax.swing.*;
 
 public class Rect extends Figure {
-	public Rect (int x, int y, int w, int h, Color line, Color bg, int depth) {
-		super(x, y, w, h, line, bg, depth);
+	public Rect (int x, int y, int w, int h, Color line, Color bg) {
+		super(x, y, w, h, line, bg);
 	}
 	
-	public Rect (int x, int y, int w, int h, int depth) {
-		super(x, y, w, h, Color.BLACK, Color.WHITE, depth);
+	public Rect (int x, int y, int w, int h) {
+		super(x, y, w, h, Color.BLACK, Color.WHITE);
 	}
 
 	public boolean pointInArea (int x, int y) {
@@ -56,4 +56,6 @@ public class Rect extends Figure {
 		g2d.drawRect(this.x+1, this.y+1, this.w-2, this.h-2);
 		g2d.drawRect(this.x-1, this.y-1, this.w+2, this.h+2);
 	}
+
+	public void rightClick() {};
 }

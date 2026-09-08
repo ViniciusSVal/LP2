@@ -13,28 +13,20 @@ public class Triangle extends Figure {
 		RECT,
 		ISOS
 	}
-	//private Orients orient;
-	//public enum Orients {
-	//	UP_RIGHT,
-	//	DOWN_RIGHT,
-	//	UP_LEFT,
-	//	DOWN_LEFT
-	//}
 
-	public Triangle (int x, int y, int w, int h, Color line, Color bg, int depth, Modes mode /*, Orients orient*/) {
-		super(x, y, w, h, line, bg, depth);
+	public Triangle (int x, int y, int w, int h, Color line, Color bg, Modes mode) {
+		super(x, y, w, h, line, bg);
 		this.mode = mode;
-	
-		//this.orient = orient;
+
 		this.redefineForm();
 	}
 
-	public Triangle (int x, int y, int w, int h, Color line, Color bg, int depth) {
-		this(x, y, w, h, line, bg, depth, Modes.RECT /*, Orients.UP_RIGHT*/);	
+	public Triangle (int x, int y, int w, int h, Color line, Color bg) {
+		this(x, y, w, h, line, bg, Modes.RECT);	
 	}
 
-	public Triangle (int x, int y, int w, int h, int depth) {
-		this(x, y, w, h, Color.BLACK, Color.WHITE, depth);
+	public Triangle (int x, int y, int w, int h) {
+		this(x, y, w, h, Color.BLACK, Color.WHITE);
 	}
 	
 	public void redefineForm () {
@@ -63,40 +55,14 @@ public class Triangle extends Figure {
 				break;
 			default:
 		}
-		
-		/*
-		switch (this.orient) {
-			//case Orient.UP_RIGHT:
-			case Orients.DOWN_RIGHT:
-			case Orients.DOWN_LEFT:
-				for (int y : this.yPoints) {
-					if (y == this.y) 
-						y = this.y + this.h;
-					else if (y == this.y + this.h)
-						y = this.y;
-				}
-
-				if (this.orient == Orients.DOWN_RIGHT)
-					break;
-			case Orients.UP_LEFT:
-				for (int x : this.xPoints) {
-					if (x == this.x) 
-						x = this.x + this.w;
-					else if (x == this.x + this.w)
-						x = this.x;
-				}
-
-				break;
-			default:
-		}
-		*/
 	}
 	
-	public void changeForm () {
+	public void rightClick() {
+		this.changeForm();
+	}
+	private void changeForm () {
 		this.mode = (mode == Modes.RECT) ? Modes.ISOS : Modes.RECT;
 		
-
-		//this.orient = orient;
 		this.redefineForm();
 	}
 
@@ -105,7 +71,6 @@ public class Triangle extends Figure {
 		String s = JOptionPane.showInputDialog(frame,
 				"Cor de contorno",
 				"000000");
-				//JOptionPane.QUESTION_MESSAGE);
 		
 		if (s == null) return;
 
@@ -116,7 +81,6 @@ public class Triangle extends Figure {
 		s = JOptionPane.showInputDialog(frame,
 				"Cor de fundo",
 				"ffffff");
-				//JOptionPane.QUESTION_MESSAGE);
 		
 		if (s == null) return;
 		
@@ -151,20 +115,6 @@ public class Triangle extends Figure {
 
 			xs[i] = this.xPoints[i] + xs[i];
 			ys[i] = this.yPoints[i] + ys[i];
-
-			/*
-			if (this.xPoints[i] == this.x)
-				xs[i] = this.x - 1;
-			else if (this.xPoints[i] == this.x + this.w) 
-				xs[i] = this.x + this.w + 1;
-			else xs[i] = this.xPoints[i];
-
-			if (this.yPoints[i] == this.y)
-				ys[i] = this.y - 1;
-			else if (this.yPoints[i] == this.y + this.h) 
-				ys[i] = this.y + this.h + 1;	
-			else ys[i] = this.yPoints[i];
-			*/
 		}
 
 		g2d.drawPolygon(xs, ys, 3);
@@ -175,20 +125,6 @@ public class Triangle extends Figure {
 
 			xs[i] = this.xPoints[i] - xs[i];
 			ys[i] = this.yPoints[i] - ys[i];
-			
-			/*
-			if (this.xPoints[i] == this.x)
-				xs[i] = this.x - 1;
-			else if (this.xPoints[i] == this.x + this.w) 
-				xs[i] = this.x + this.w + 1;
-			else xs[i] = this.xPoints[i];
-
-			if (this.yPoints[i] == this.y)
-				ys[i] = this.y - 1;
-			else if (this.yPoints[i] == this.y + this.h) 
-				ys[i] = this.y + this.h + 1;	
-			else ys[i] = this.yPoints[i];
-			*/
 		}
 
 		g2d.drawPolygon(xs, ys, 3);

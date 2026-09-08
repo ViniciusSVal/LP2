@@ -7,16 +7,11 @@ import javax.swing.*;
 import java.awt.geom.Line2D;
 
 public class Line extends Figure {
-	//private int x1, y1; // pos inicial
-	//private int x2, y2; // pos final
-	
-	//private Color lineColor; 	// cor de "contorno"
-
-	public Line (int x1, int y1, int x2, int y2, Color line, int depth) {
-		super(x1, y1, x2, y2, line, Color.BLACK, depth);
+	public Line (int x, int y, int w, int h, Color line) {
+		super(x, y, w, h, line, Color.BLACK);
 	}
-	public Line (int x1, int y1, int x2, int y2, int depth) {
-		super(x1, y1, x2, y2, Color.BLACK, Color.BLACK, depth);
+	public Line (int x, int y, int w, int h) {
+		super(x, y, w, h, Color.BLACK, Color.BLACK);
 	}
 
 	public boolean pointInArea (int x, int y) {
@@ -61,4 +56,6 @@ public class Line extends Figure {
 		g2d.drawLine(this.x-1, this.y-1, x2-1, y2-1);
 		g2d.drawLine(this.x+1, this.y+1, x2+1, y2+1);
 	}
+
+	public void rightClick() {};
 }

@@ -47,8 +47,7 @@ class Frame extends JFrame {
 							mouseX,
 							mouseY,
 							100,
-							75,
-							figs.size()
+							75
 						));
 						break;
 					case KeyEvent.VK_E: 
@@ -56,8 +55,7 @@ class Frame extends JFrame {
 							mouseX,
 							mouseY,
 							100,
-							75,
-							figs.size()
+							75
 						));
 						break;
 					case KeyEvent.VK_L: 
@@ -65,8 +63,7 @@ class Frame extends JFrame {
 							mouseX,
 							mouseY,
 							100,
-							75,
-							figs.size()
+							75
 						));
 						break;
 					case KeyEvent.VK_T:
@@ -74,18 +71,27 @@ class Frame extends JFrame {
 							mouseX,
 							mouseY,
 							100,
-							75,
-							figs.size()
+							75
 						));
 						break;
+					case KeyEvent.VK_I:
+						if (figFocused != null) 
+							figUp(figs.indexOf(figFocused));	
+						break;
+					
+					case KeyEvent.VK_K:
+						if (figFocused != null) 
+							figDown(figs.indexOf(figFocused));	
+						break;
+
 					case KeyEvent.VK_C:
 						if (figFocused != null)
 							figFocused.changeColor(Frame.this);
 						break;
 					case KeyEvent.VK_BACK_SPACE: //delete
 						if (figFocused != null) {
-							removeFig(figs.indexOf(figFocused));
-								figFocused = null;
+							figs.remove(figFocused);
+							figFocused = null;
 						}
 				}
 				
@@ -99,30 +105,18 @@ class Frame extends JFrame {
 				if (mouseButton == MouseEvent.BUTTON2) return; 
 				
 				figFocused = null;
-				int indexFocused = 0;
-				int n = figs.size();
-				for (int i = 0; i < n; i++) {
-					Figure fig = figs.get(i);
-					//if (fig == null) return;
-					if (fig.pointInArea(mouseX, mouseY)) {
-						indexFocused = i;
+
+				for (Figure fig : figs) 
+					if (fig.pointInArea(mouseX, mouseY))
 						figFocused = fig;
-						break;
-					}
-				}
-					
-				if (figFocused != null) {
-					depthUp(indexFocused);
-					//printList();
-				}
 
 				repaint();
 			}
 
 			public void mouseClicked (MouseEvent e) {
 				if (mouseButton == MouseEvent.BUTTON3)
-					if (figFocused instanceof Triangle) {
-						((Triangle) figFocused).changeForm();
+					if (figFocused != null) {
+						figFocused.rightClick();
 						repaint();
 					}
 			}
@@ -163,91 +157,29 @@ class Frame extends JFrame {
 		});
 
 		this.setTitle("EdVet");
-		this.setSize(600, 400);
+		this.setSize(720, 480);
 		this.setVisible(true);
 	}
 	
-	private void printList() {
-		for (Figure fig : figs) {
-			System.out.printf("%d ", fig.getDepth());
-		}
-		System.out.printf("\n");
-	}
+	private void figUp(int index) {
+		if (index >= figs.size()-1) return;
 
-	private void depthUp(int index) {
-		figs.add(0, figs.get(index));
-		figs.get(0).setDepth(0);
-		removeFig(index+1);
-		
-		int n = figs.size();
-		for (int i = 1; i < n; i++) {
-			Figure fig = figs.get(i);
-			fig.setDepth(fig.getDepth()+1);
-		}
+		Figure fig2 = figs.set(index+1, figs.get(index));
+		figs.set(index, fig2);
 	}
-
-	private void removeFig(int index) {
-		figs.remove(index); 	
+	private void figDown(int index) {
+		if (index <= 0) return;
 		
-		int n = figs.size();
-		for (int i = index; i < n; i++) {
-			Figure fig = figs.get(i);
-			fig.setDepth(fig.getDepth()-1);
-		}
+		Figure fig2 = figs.set(index-1, figs.get(index));
+		figs.set(index, fig2);
 	}
-
-	/*
-	private void sortDepth () { 
-		int n = figs.size();
-		
-		for (int cellSize = 1; cellSize <= n-1; cellSize *= 2) {
-			for (int i = 0; i < n-1; i += 2*cellSize) {
-				int m = Math.min(i +   cellSize -1, n-1);
-				int f = Math.min(i + 2*cellSize -1, n-1);
-				
-				mergeList(i, m, f);
-			}
-		}
-		
-		//int m = i/2 + f/2; //índice médio;
-		//this.sortDepth(i, m);
-		//this.sortDepth(m+1, f);
-		//this.mergeList(i, m, f);
-		
-	}
-	private void mergeList(int i, int m, int f) {
-		int p1, p2;
-		p1 = i; p2 = m+1;
-		int t[] = new int[f-i+1];
-		
-		for (int k = 0; k < f-i+1; k++) {
-			int v1, v2; 
-			v1 = p1 <= m? figs.get(p1).getDepth() : 0; 
-			v2 = p2 <= f? figs.get(p2).getDepth() : 0;
-			
-			if ((p2 > f) || ((p1 <= m) && (v1 < v2))) {
-				t[k] = v1; p1++;
-			}
-			else {
-				t[k] = v2; p2++;
-			}
-		}
-
-		for (int k = 0; k < f-i+1; k++) {
-				figs.get(k).setDepth( t[k] );
-		}
-	}
-	*/
 
 	public void paint (Graphics g) {
 		super.paint(g); //redesenhando a tela
 		Graphics2D g2d = (Graphics2D) g;
 
-		int n = figs.size();
-		for (int i = n-1; i >= 0; i--) {
-			Figure fig = figs.get(i);
+		for (Figure fig : figs) 
 			fig.paint(g2d);
-		}
 
 		if (figFocused != null) figFocused.paintFocus(g2d);
 	}
