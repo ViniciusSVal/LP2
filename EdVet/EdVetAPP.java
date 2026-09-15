@@ -74,6 +74,13 @@ class Frame extends JFrame {
 							75
 						));
 						break;
+					case KeyEvent.VK_1:
+						figs.add(new Carro(
+							mouseX,
+							mouseY,
+							100,
+							75			
+						));
 					case KeyEvent.VK_I:
 						if (figFocused != null) 
 							figUp(figs.indexOf(figFocused));	

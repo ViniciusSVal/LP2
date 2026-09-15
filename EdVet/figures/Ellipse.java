@@ -41,6 +41,14 @@ public class Ellipse extends Figure {
 		hex = Integer.parseInt(s, 16);	
 		this.bgColor = new Color(hex);
 	}
+
+       	public void drag (int dx, int dy) {
+		dragRect(dx, dy);
+	}	
+       	public void redim (int dw, int dh) {
+		redimRect(dw, dh);
+	}	
+
 	public void paint (Graphics2D g2d) {
 		//desenhando o fundo
 		g2d.setPaint(this.bgColor);

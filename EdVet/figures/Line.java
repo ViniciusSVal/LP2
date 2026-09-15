@@ -39,6 +39,14 @@ public class Line extends Figure {
 		int hex = Integer.parseInt(s, 16);
 		this.lineColor = new Color(hex);
 	}
+	
+       	public void drag (int dx, int dy) {
+		dragRect(dx, dy);
+	}	
+       	public void redim (int dw, int dh) {
+		redimRect(dw, dh);
+	}	
+
 	public void paint (Graphics2D g2d) {
 		//desenhando a linha
 		g2d.setPaint(this.lineColor);

@@ -15,15 +15,15 @@ public abstract class Figure {
 		this.bgColor = bg;
 	}
 
-	public void drag(int dx, int dy) {
+	public void dragRect(int dx, int dy) {
 		this.x += dx;
 		this.y += dy;
 	}
-	public void redim (int dw, int dh) {
+	public void redimRect (int dw, int dh) {
 		this.w += dw;
 		this.h += dh;
 	}	
-
+	
 	protected boolean pointInRect (int x, int y) {
 		if ((this.x < x) && (x < this.x + this.w) &&
 		    (this.y < y) && (y < this.y + this.h)) {
@@ -33,6 +33,8 @@ public abstract class Figure {
 		return false;
 	}
 
+	public abstract void drag  (int dx, int dy);
+	public abstract void redim (int dw, int dh);
 	public abstract boolean pointInArea(int x, int y);	
 	public abstract void changeColor(JFrame frame);
 	public abstract void paint(Graphics2D g2d);

@@ -92,6 +92,13 @@ public class Triangle extends Figure {
 		Polygon p = new Polygon(this.xPoints, this.yPoints, 3);
 		return p.contains(x, y);
 	}
+	
+       	public void drag (int dx, int dy) {
+		dragRect(dx, dy);
+	}	
+       	public void redim (int dw, int dh) {
+		redimRect(dw, dh);
+	}	
 
 	public void paint (Graphics2D g2d) {
 		//background
