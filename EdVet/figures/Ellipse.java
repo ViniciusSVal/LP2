@@ -12,6 +12,21 @@ public class Ellipse extends Figure {
 		super(x, y, w, h, Color.BLACK, Color.WHITE);
 	}
 	
+	//duplicando a elipse
+	public Figure copy () {
+		//construindo a figura com os mesmos escalares
+		Ellipse e = new Ellipse(this.x, this.y, this.w, this.h);
+		//e copiando as cores da forma certa
+		e.lineColor = new Color(this.lineColor.getRGB());
+		e.bgColor = new Color(this.bgColor.getRGB());
+		
+		//movendo a figura 20 pixels para baixo e para direita
+		e.drag(20, 20);
+
+		//retornando a cópia
+		return e;
+	}
+
 	public boolean pointInArea (int x, int y) {
 		return this.pointInRect(x, y);
 	}

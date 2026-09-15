@@ -14,6 +14,21 @@ public class Line extends Figure {
 		super(x, y, w, h, Color.BLACK, Color.BLACK);
 	}
 
+	//copiando a linha
+	public Figure copy () {
+		//copiando os escalares da linha
+		Line l = new Line(this.x, this.y, this.w, this.h);
+		//e copiando as cores da forma certa
+		l.lineColor = new Color(this.lineColor.getRGB());
+		/* a linha não utiliza a cor de fundo, então não tem necessidade de copiá-la */
+		
+		//movendo a figura 20 pixels para baixo e para direita
+		l.drag(20, 20);
+
+		//retornando a linha
+		return l;
+	}
+
 	public boolean pointInArea (int x, int y) {
 		int x2 = this.x + this.w; 
 		int y2 = this.y + this.h;
@@ -30,7 +45,7 @@ public class Line extends Figure {
 		// trocando contorno
 		String s = JOptionPane.showInputDialog(
 			frame,
-			"Cor de contorno",
+			"Cor",
 			"000000"
 		);
 		

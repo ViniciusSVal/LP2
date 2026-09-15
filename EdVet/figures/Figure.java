@@ -32,7 +32,7 @@ public abstract class Figure {
 		
 		return false;
 	}
-
+	
 	public abstract void drag  (int dx, int dy);
 	public abstract void redim (int dw, int dh);
 	public abstract boolean pointInArea(int x, int y);	
@@ -40,4 +40,6 @@ public abstract class Figure {
 	public abstract void paint(Graphics2D g2d);
 	public abstract void paintFocus(Graphics2D g2d);
 	public abstract void rightClick();
+	//COPIAR
+	public abstract Figure copy ();	
 }

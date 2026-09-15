@@ -44,6 +44,25 @@ public class Carro extends Figure {
 		this.roda2 = new Ellipse(x+w/2, y+h/3, w/2, 2*h/3);
 	}
 
+	//duplicando o carro
+	public Figure copy () {
+		//construindo a figura com os mesmos escalares
+		Carro c = new Carro(this.x, this.y, this.w, this.h);
+		//e copiando as cores da forma certa
+		c.chassi.lineColor = new Color(this.chassi.lineColor.getRGB());
+		c.roda1.lineColor = new Color(this.roda1.lineColor.getRGB());
+		c.roda2.lineColor = new Color(this.roda2.lineColor.getRGB());
+		c.chassi.bgColor = new Color(this.chassi.bgColor.getRGB());
+		c.roda1.bgColor = new Color(this.roda1.bgColor.getRGB());
+		c.roda2.bgColor = new Color(this.roda2.bgColor.getRGB());
+
+		//movendo a figura 20 pixels para baixo e para direita
+		c.drag(20, 20);
+
+		//retornando a cópia
+		return c;
+	}
+
 	//função que usarei para checar se a figura foi clicada
 	public boolean pointInArea (int x, int y) {
 		//retornando se eu cliquei no chassi, na roda 1, ou na roda 2
@@ -54,6 +73,8 @@ public class Carro extends Figure {
 
        	public void drag (int dx, int dy) {
 		//arrastar cada parte do carro não afetará o formato dele
+		this.x += dx;
+		this.y += dy;
 		this.chassi.drag(dx, dy);
 		this.roda1.drag(dx, dy);
 		this.roda2.drag(dx, dy);

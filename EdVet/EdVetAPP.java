@@ -74,6 +74,8 @@ class Frame extends JFrame {
 							75
 						));
 						break;
+
+					//Prova Prática
 					case KeyEvent.VK_1:
 						figs.add(new Carro(
 							mouseX,
@@ -81,6 +83,14 @@ class Frame extends JFrame {
 							100,
 							75			
 						));
+						break;
+					case KeyEvent.VK_3:
+						if (figFocused != null) {
+							Figure copy = figFocused.copy();
+							figs.add(copy);
+							figFocused = copy;
+						}
+
 					case KeyEvent.VK_I:
 						if (figFocused != null) 
 							figUp(figs.indexOf(figFocused));	

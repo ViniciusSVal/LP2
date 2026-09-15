@@ -29,6 +29,21 @@ public class Triangle extends Figure {
 		this(x, y, w, h, Color.BLACK, Color.WHITE);
 	}
 	
+	//duplicando o triangulo
+	public Figure copy () {
+		//construindo a figura com os mesmos escalares
+		Triangle t = new Triangle(this.x, this.y, this.w, this.h);
+		//e copiando as cores da forma certa
+		t.lineColor = new Color(this.lineColor.getRGB());
+		t.bgColor = new Color(this.bgColor.getRGB());
+		
+		//movendo a figura 20 pixels para baixo e para direita
+		t.drag(20, 20);
+
+		//retornando a cópia
+		return t;
+	}
+
 	public void redefineForm () {
 		switch (this.mode) {
 			case Modes.RECT: 
