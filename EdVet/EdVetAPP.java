@@ -3,6 +3,8 @@ import java.awt.event.*;
 import javax.swing.*;
 import java.util.Random;
 import java.util.ArrayList;
+import java.io.*;
+
 
 import figures.*;
 
@@ -21,11 +23,28 @@ class Frame extends JFrame {
 	Figure figFocused;
 
 	Frame() {
+		try {
+			FileInputStream 	f = new FileInputStream("proj.bin");
+			ObjectInputStream 	o = new ObjectInputStream(f);
+			this.figs = (ArrayList<Figure>) o.readObject();
+			o.close();
+		}
+		catch (Exception x) {
+			System.out.printf("Nenhum arquivo para ler\n");
+		}
+
 		this.addWindowListener (
 			new WindowAdapter() {
 				public void windowClosing (WindowEvent e) {
+					try {
+						FileOutputStream  f = new FileOutputStream("proj.bin");
+						ObjectOutputStream o = new ObjectOutputStream(f);
+						o.writeObject(figs);
+						o.flush();
+						o.close();
+					}
+					catch (Exception x) {}
 					System.exit(0);
-					repaint();
 				}
 			}
 		);

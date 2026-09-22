@@ -3,7 +3,9 @@ package figures;
 import java.awt.*;
 import javax.swing.JFrame;
 
-public abstract class Figure {
+import java.io.Serializable;
+
+public abstract class Figure implements Serializable {
 	protected int x,y, w,h;
 	protected Color lineColor;
 	protected Color bgColor;
