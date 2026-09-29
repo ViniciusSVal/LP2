@@ -4,8 +4,9 @@ import java.awt.*;
 import javax.swing.JFrame;
 
 import java.io.Serializable;
+import ivisible.IVisible;
 
-public abstract class Figure implements Serializable {
+public abstract class Figure implements IVisible, Serializable {
 	protected int x,y, w,h;
 	protected Color lineColor;
 	protected Color bgColor;
@@ -39,9 +40,7 @@ public abstract class Figure implements Serializable {
 	public abstract void redim (int dw, int dh);
 	public abstract boolean pointInArea(int x, int y);	
 	public abstract void changeColor(JFrame frame);
-	public abstract void paint(Graphics2D g2d);
-	public abstract void paintFocus(Graphics2D g2d);
-	public abstract void rightClick();
-	//COPIAR
-	public abstract Figure copy ();	
+	public abstract void paint(Graphics2D g2d, boolean focused);
+	public abstract void rightClick();	
+	public abstract Figure copy ();	//DUPLICAR
 }

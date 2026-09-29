@@ -108,25 +108,25 @@ public class Carro extends Figure {
 		*/
 	}	
 
-	//funções de paint
-	public void paint (Graphics2D g2d) {
+	//função de paint
+	public void paint (Graphics2D g2d, boolean focused) {
 		//simplesmente pedindo para as subfiguras se desenharem
-		this.chassi.paint(g2d);
-		this.roda1.paint(g2d);
-		this.roda2.paint(g2d);
-	}
-	public void paintFocus (Graphics2D g2d) {
-		//simplesmente pedindo para as subfiguras se desenharem
-		this.chassi.paintFocus(g2d);
+		this.chassi.paint(g2d, false);
+		this.roda1.paint(g2d, false);
+		this.roda2.paint(g2d, false);
 		
-		//redesenhando as rodas para o chassi não se sobrepor sobre elas  
-		this.roda1.paint(g2d);
-		this.roda2.paint(g2d);
+		if (focused) {
+			//simplesmente pedindo para as subfiguras se desenharem
+			this.chassi.paint(g2d, true);
+			
+			//redesenhando as rodas para o chassi não se sobrepor sobre elas  
+			this.roda1.paint(g2d, false);
+			this.roda2.paint(g2d, false);
 
-		this.roda1.paintFocus(g2d);
-		this.roda2.paintFocus(g2d);
+			this.roda1.paint(g2d, true);
+			this.roda2.paint(g2d, true);
+		}
 	}
-
 
 	//função que muda a cor do carro
 	public void changeColor (JFrame frame) {

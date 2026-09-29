@@ -115,7 +115,7 @@ public class Triangle extends Figure {
 		redimRect(dw, dh);
 	}	
 
-	public void paint (Graphics2D g2d) {
+	public void paint (Graphics2D g2d, boolean focused) {
 		//background
 		g2d.setPaint(this.bgColor);
 		g2d.fillPolygon(this.xPoints, this.yPoints, 3);
@@ -123,33 +123,34 @@ public class Triangle extends Figure {
 		//outline
 		g2d.setPaint(this.lineColor);
 		g2d.drawPolygon(this.xPoints, this.yPoints, 3);
-	}
-	public void paintFocus (Graphics2D g2d) {
-		//Foco
-		g2d.setPaint(Color.RED);
 		
-		int xs[] = new int[3];
-		int ys[] = new int[3];
-	
-		for (int i = 0; i < 3; i++) {
-			xs[i] =	(int) Math.signum(this.xPoints[i] - this.x - this.w/2);
-			ys[i] = (int) Math.signum(this.yPoints[i] - this.y - this.h/2);
-
-			xs[i] = this.xPoints[i] + xs[i];
-			ys[i] = this.yPoints[i] + ys[i];
-		}
-
-		g2d.drawPolygon(xs, ys, 3);
+		//se em foco
+		if (focused) {	
+			g2d.setPaint(Color.RED);
+			
+			int xs[] = new int[3];
+			int ys[] = new int[3];
 		
-		for (int i = 0; i < 3; i++) {
-			xs[i] =	(int) Math.signum(this.xPoints[i] - this.x - this.w/2);
-			ys[i] = (int) Math.signum(this.yPoints[i] - this.y - this.h/2);
+			for (int i = 0; i < 3; i++) {
+				xs[i] =	(int) Math.signum(this.xPoints[i] - this.x - this.w/2);
+				ys[i] = (int) Math.signum(this.yPoints[i] - this.y - this.h/2);
 
-			xs[i] = this.xPoints[i] - xs[i];
-			ys[i] = this.yPoints[i] - ys[i];
+				xs[i] = this.xPoints[i] + xs[i];
+				ys[i] = this.yPoints[i] + ys[i];
+			}
+
+			g2d.drawPolygon(xs, ys, 3);
+			
+			for (int i = 0; i < 3; i++) {
+				xs[i] =	(int) Math.signum(this.xPoints[i] - this.x - this.w/2);
+				ys[i] = (int) Math.signum(this.yPoints[i] - this.y - this.h/2);
+
+				xs[i] = this.xPoints[i] - xs[i];
+				ys[i] = this.yPoints[i] - ys[i];
+			}
+
+			g2d.drawPolygon(xs, ys, 3);
 		}
-
-		g2d.drawPolygon(xs, ys, 3);
 	}
 }
 

@@ -65,7 +65,7 @@ public class Rect extends Figure {
 		redimRect(dw, dh);
 	}	
 
-	public void paint (Graphics2D g2d) {
+	public void paint (Graphics2D g2d, boolean focused) {
 		//desenhando o fundo
 		g2d.setPaint(this.bgColor);
 		g2d.fillRect(this.x, this.y, this.w, this.h);
@@ -73,11 +73,13 @@ public class Rect extends Figure {
 		//desenhando o contorno
 		g2d.setPaint(this.lineColor);
 		g2d.drawRect(this.x, this.y, this.w, this.h);
-	}
-	public void paintFocus (Graphics2D g2d) {
-		g2d.setPaint(Color.RED);
-		g2d.drawRect(this.x+1, this.y+1, this.w-2, this.h-2);
-		g2d.drawRect(this.x-1, this.y-1, this.w+2, this.h+2);
+		
+		//se em foco
+		if (focused) {
+			g2d.setPaint(Color.RED);
+			g2d.drawRect(this.x+1, this.y+1, this.w-2, this.h-2);
+			g2d.drawRect(this.x-1, this.y-1, this.w+2, this.h+2);
+		}
 	}
 
 	public void rightClick() {};

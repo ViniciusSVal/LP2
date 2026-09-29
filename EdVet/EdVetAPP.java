@@ -23,6 +23,7 @@ class Frame extends JFrame {
 	Figure figFocused;
 
 	Frame() {
+		/*
 		try {
 			FileInputStream 	f = new FileInputStream("proj.bin");
 			ObjectInputStream 	o = new ObjectInputStream(f);
@@ -32,10 +33,12 @@ class Frame extends JFrame {
 		catch (Exception x) {
 			System.out.printf("Nenhum arquivo para ler\n");
 		}
+		*/
 
 		this.addWindowListener (
 			new WindowAdapter() {
 				public void windowClosing (WindowEvent e) {
+					/*
 					try {
 						FileOutputStream  f = new FileOutputStream("proj.bin");
 						ObjectOutputStream o = new ObjectOutputStream(f);
@@ -44,6 +47,8 @@ class Frame extends JFrame {
 						o.close();
 					}
 					catch (Exception x) {}
+					*/
+
 					System.exit(0);
 				}
 			}
@@ -109,7 +114,8 @@ class Frame extends JFrame {
 							figs.add(copy);
 							figFocused = copy;
 						}
-
+						break;
+					
 					case KeyEvent.VK_I:
 						if (figFocused != null) 
 							figUp(figs.indexOf(figFocused));	
@@ -215,9 +221,7 @@ class Frame extends JFrame {
 		Graphics2D g2d = (Graphics2D) g;
 
 		for (Figure fig : figs) 
-			fig.paint(g2d);
-
-		if (figFocused != null) figFocused.paintFocus(g2d);
+			fig.paint(g2d, figFocused == fig);
 	}
 
 	

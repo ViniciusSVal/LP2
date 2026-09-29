@@ -62,22 +62,27 @@ public class Line extends Figure {
 		redimRect(dw, dh);
 	}	
 
-	public void paint (Graphics2D g2d) {
+	public void paint (Graphics2D g2d, boolean focused) {
 		//desenhando a linha
 		g2d.setPaint(this.lineColor);
 		
 		int x2 = this.x + this.w;
 		int y2 = this.y + this.h;
 		g2d.drawLine(this.x, this.y, x2, y2);
+		
+		//se em foco 
+		if (focused) {	
+			//desenhando a linha quando ela estiver em foco:
+			g2d.setPaint(Color.RED);
+
+			//int x2 = this.x + this.w;
+			//int y2 = this.y + this.h;
+			g2d.drawLine(this.x-1, this.y-1, x2-1, y2-1);
+			g2d.drawLine(this.x+1, this.y+1, x2+1, y2+1);
+		}	
 	}
 	public void paintFocus (Graphics2D g2d) {
-		//desenhando a linha quando ela estiver em foco:
-		g2d.setPaint(Color.RED);
 
-		int x2 = this.x + this.w;
-		int y2 = this.y + this.h;
-		g2d.drawLine(this.x-1, this.y-1, x2-1, y2-1);
-		g2d.drawLine(this.x+1, this.y+1, x2+1, y2+1);
 	}
 
 	public void rightClick() {};

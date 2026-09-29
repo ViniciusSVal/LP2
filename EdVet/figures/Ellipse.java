@@ -64,7 +64,7 @@ public class Ellipse extends Figure {
 		redimRect(dw, dh);
 	}	
 
-	public void paint (Graphics2D g2d) {
+	public void paint (Graphics2D g2d, boolean focused) {
 		//desenhando o fundo
 		g2d.setPaint(this.bgColor);
 		g2d.fillOval(this.x, this.y, this.w, this.h);
@@ -72,11 +72,16 @@ public class Ellipse extends Figure {
 		//desenhando o conto'rno
 		g2d.setPaint(this.lineColor);
 		g2d.drawOval(this.x, this.y, this.w, this.h);
+
+		//se em foco
+		if (focused) {
+			g2d.setPaint(Color.RED);
+			g2d.drawOval(this.x+1, this.y+1, this.w-2, this.h-2);
+			g2d.drawOval(this.x-1, this.y-1, this.w+2, this.h+2);
+		}
 	}
 	public void paintFocus (Graphics2D g2d) {
-		g2d.setPaint(Color.RED);
-		g2d.drawOval(this.x+1, this.y+1, this.w-2, this.h-2);
-		g2d.drawOval(this.x-1, this.y-1, this.w+2, this.h+2);
+
 	}
 
 	public void rightClick() {};
