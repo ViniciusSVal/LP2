@@ -15,6 +15,7 @@ public class EdVetAPP {
 	}
 }
 
+@SuppressWarnings("serial")
 class Frame extends JFrame {
 	ArrayList<Figure> figs = new ArrayList<Figure>();
 
@@ -22,32 +23,38 @@ class Frame extends JFrame {
 	int mouseButton;
 	Figure figFocused;
 
+	@SuppressWarnings("unchecked")
 	Frame() {
-		/*
+
 		try {
 			FileInputStream 	f = new FileInputStream("proj.bin");
 			ObjectInputStream 	o = new ObjectInputStream(f);
 			this.figs = (ArrayList<Figure>) o.readObject();
 			o.close();
+
+			System.out.printf("Arquivo carregado\n");
+			this.repaint();
 		}
 		catch (Exception x) {
 			System.out.printf("Nenhum arquivo para ler\n");
 		}
-		*/
+		
 
 		this.addWindowListener (
 			new WindowAdapter() {
 				public void windowClosing (WindowEvent e) {
-					/*
+
 					try {
 						FileOutputStream  f = new FileOutputStream("proj.bin");
 						ObjectOutputStream o = new ObjectOutputStream(f);
 						o.writeObject(figs);
 						o.flush();
 						o.close();
+
+						System.out.printf("Arquivo salvo\n");
 					}
 					catch (Exception x) {}
-					*/
+					
 
 					System.exit(0);
 				}
@@ -59,13 +66,13 @@ class Frame extends JFrame {
 
 				switch (key) {
 					case KeyEvent.VK_UP: //mover com as setas 
-						figs.get(0).drag(0, -5); break;
+						figFocused.drag(0, -5); break;
 					case KeyEvent.VK_DOWN: 
-						figs.get(0).drag(0, 5); break;
+						figFocused.drag(0, 5); break;
 					case KeyEvent.VK_LEFT: 
-						figs.get(0).drag(-5, 0); break;
+						figFocused.drag(-5, 0); break;
 					case KeyEvent.VK_RIGHT: 
-						figs.get(0).drag(5, 0); break;
+						figFocused.drag(5, 0); break;
 					case KeyEvent.VK_R:
 						figs.add(new Rect(
 							mouseX,
