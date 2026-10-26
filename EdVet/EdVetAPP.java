@@ -7,6 +7,7 @@ import java.io.*;
 
 
 import figures.*;
+import buttons.*;
 
 public class EdVetAPP {
 	public static void main (String[] args) {
@@ -18,13 +19,18 @@ public class EdVetAPP {
 @SuppressWarnings("serial")
 class Frame extends JFrame {
 	ArrayList<Figure> figs = new ArrayList<Figure>();
+	ArrayList<Botao> buttons = new ArrayList<Botao>();
 
 	int mouseX, mouseY;
 	int mouseButton;
 	Figure figFocused;
+	Botao butActive;
 
 	@SuppressWarnings("unchecked")
 	Frame() {
+		for (int i = 0; i <= 5; i++) {
+			buttons.add(new Botao(20, 50 + 50 * i, 40, 40, i));
+		}
 
 		try {
 			FileInputStream 	f = new FileInputStream("proj.bin");
@@ -38,7 +44,6 @@ class Frame extends JFrame {
 		catch (Exception x) {
 			System.out.printf("Nenhum arquivo para ler\n");
 		}
-		
 
 		this.addWindowListener (
 			new WindowAdapter() {
@@ -66,13 +71,13 @@ class Frame extends JFrame {
 
 				switch (key) {
 					case KeyEvent.VK_UP: //mover com as setas 
-						figFocused.drag(0, -5); break;
+						if (figFocused != null) figFocused.drag(0, -5); break;
 					case KeyEvent.VK_DOWN: 
-						figFocused.drag(0, 5); break;
+						if (figFocused != null) figFocused.drag(0, 5); break;
 					case KeyEvent.VK_LEFT: 
-						figFocused.drag(-5, 0); break;
+						if (figFocused != null) figFocused.drag(-5, 0); break;
 					case KeyEvent.VK_RIGHT: 
-						figFocused.drag(5, 0); break;
+						if (figFocused != null) figFocused.drag(5, 0); break;
 					case KeyEvent.VK_R:
 						figs.add(new Rect(
 							mouseX,
@@ -106,7 +111,7 @@ class Frame extends JFrame {
 						));
 						break;
 
-					//Prova Prática
+					//Prova Prática 1
 					case KeyEvent.VK_1:
 						figs.add(new Carro(
 							mouseX,
@@ -122,7 +127,7 @@ class Frame extends JFrame {
 							figFocused = copy;
 						}
 						break;
-					
+
 					case KeyEvent.VK_I:
 						if (figFocused != null) 
 							figUp(figs.indexOf(figFocused));	
@@ -153,21 +158,93 @@ class Frame extends JFrame {
 				
 				if (mouseButton == MouseEvent.BUTTON2) return; 
 				
+				//selecionando figuras
 				figFocused = null;
-
 				for (Figure fig : figs) 
 					if (fig.pointInArea(mouseX, mouseY))
 						figFocused = fig;
-
+				
+				//pressionando botões
+				for (Botao but : buttons) 
+					if (but.pointInArea(mouseX, mouseY)) {
+						butActive = (but != butActive) ? but : null; 
+						
+						repaint();
+						return;
+					}
+				
 				repaint();
 			}
 
 			public void mouseClicked (MouseEvent e) {
-				if (mouseButton == MouseEvent.BUTTON3)
+				if (mouseButton == MouseEvent.BUTTON3) {
 					if (figFocused != null) {
 						figFocused.rightClick();
 						repaint();
 					}
+				}
+				else if (mouseButton == MouseEvent.BUTTON1)
+				{
+					//se pressionei algum botão, retorno
+					for (Botao but : buttons) 
+						if (but.pointInArea(mouseX, mouseY)) return;
+
+					if (butActive == null) return;
+					
+					//se eu não pressionei nenhum botão agora e mantenho um botão pressionado
+					switch (buttons.indexOf(butActive)) {
+						case 0:
+							figs.add(new Rect(
+								mouseX,
+								mouseY,
+								100,
+								75
+							));
+							break;
+						case 1: 
+							figs.add(new Ellipse(
+								mouseX,
+								mouseY,
+								100,
+								75
+							));
+							break;
+						case 2: 
+							figs.add(new Line(
+								mouseX,
+								mouseY,
+								100,
+								75
+							));
+							break;
+						case 3:
+							figs.add(new Triangle(
+								mouseX,
+								mouseY,
+								100,
+								75
+							));
+							break;
+
+						case 4:
+							figs.add(new Carro(
+								mouseX,
+								mouseY,
+								100,
+								75			
+							));
+							break;
+
+						case 5: //deletar
+							if (figFocused != null) {
+								figs.remove(figFocused);
+								figFocused = null;
+							}
+					}
+
+					repaint();
+
+				}
 			}
 		});
 		this.addMouseMotionListener( new MouseMotionAdapter() {
@@ -229,6 +306,9 @@ class Frame extends JFrame {
 
 		for (Figure fig : figs) 
 			fig.paint(g2d, figFocused == fig);
+		
+		for (Botao but : buttons) 
+			but.paint(g2d, but == butActive);
 	}
 
 	
