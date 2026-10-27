@@ -44,7 +44,7 @@ class Frame extends JFrame {
 
 	@SuppressWarnings("unchecked")
 	Frame() {
-		for (int i = 0; i <= 5; i++) {
+		for (int i = 0; i <= 6; i++) {
 			buttons.add(new Botao(20, 50 + 50 * i, 40, 40, i));
 		}
 
@@ -133,6 +133,7 @@ class Frame extends JFrame {
 							figFocused = copy;
 						}
 						break;
+					// Questão 2 PF
 					case KeyEvent.VK_S:
 						salvar();
 						break;
@@ -145,7 +146,7 @@ class Frame extends JFrame {
 						if (figFocused != null) 
 							figDown(figs.indexOf(figFocused));	
 						break;
-
+					// Questão 1 PF
 					case KeyEvent.VK_C:
 						if (figFocused != null)
 							figFocused.changeColor(Frame.this);
@@ -196,62 +197,12 @@ class Frame extends JFrame {
 					//se pressionei algum botão, retorno
 					for (Botao but : buttons) 
 						if (but.pointInArea(mouseX, mouseY)) return;
-
-					if (butActive == null) return;
 					
-					//se eu não pressionei nenhum botão agora e mantenho um botão pressionado
-					switch (buttons.indexOf(butActive)) {
-						case 0:
-							figs.add(new Rect(
-								mouseX,
-								mouseY,
-								100,
-								75
-							));
-							break;
-						case 1: 
-							figs.add(new Ellipse(
-								mouseX,
-								mouseY,
-								100,
-								75
-							));
-							break;
-						case 2: 
-							figs.add(new Line(
-								mouseX,
-								mouseY,
-								100,
-								75
-							));
-							break;
-						case 3:
-							figs.add(new Triangle(
-								mouseX,
-								mouseY,
-								100,
-								75
-							));
-							break;
-
-						case 4:
-							figs.add(new Carro(
-								mouseX,
-								mouseY,
-								100,
-								75			
-							));
-							break;
-
-						case 5: //deletar
-							if (figFocused != null) {
-								figs.remove(figFocused);
-								figFocused = null;
-							}
-					}
-
+					/*se eu não pressionei nenhum botão agora e mantenho um botão pressionado
+					então eu processo a ação do botão */
+					if (butActive != null) butActive.action(mouseX, mouseY, figs, figFocused, Frame.this); 
+					
 					repaint();
-
 				}
 			}
 		});
@@ -318,7 +269,4 @@ class Frame extends JFrame {
 		for (Botao but : buttons) 
 			but.paint(g2d, but == butActive);
 	}
-
-	
-
 }
