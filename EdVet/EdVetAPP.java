@@ -26,6 +26,22 @@ class Frame extends JFrame {
 	Figure figFocused;
 	Botao butActive;
 
+	// Questão 2 da PF
+	private void salvar() {
+		try {
+			FileOutputStream  f = new FileOutputStream("proj.bin");
+			ObjectOutputStream o = new ObjectOutputStream(f);
+			o.writeObject(this.figs);
+			o.flush();
+			o.close();
+
+			System.out.printf("Arquivo salvo\n");
+		}
+		catch (Exception x) {
+			System.out.printf("Erro na gravação\n");
+		}
+	}
+
 	@SuppressWarnings("unchecked")
 	Frame() {
 		for (int i = 0; i <= 5; i++) {
@@ -47,19 +63,9 @@ class Frame extends JFrame {
 
 		this.addWindowListener (
 			new WindowAdapter() {
-				public void windowClosing (WindowEvent e) {
-
-					try {
-						FileOutputStream  f = new FileOutputStream("proj.bin");
-						ObjectOutputStream o = new ObjectOutputStream(f);
-						o.writeObject(figs);
-						o.flush();
-						o.close();
-
-						System.out.printf("Arquivo salvo\n");
-					}
-					catch (Exception x) {}
-					
+				public void windowClosing (WindowEvent e) {		
+					//salvando os objetos atuais na tela
+					salvar();
 
 					System.exit(0);
 				}
@@ -127,7 +133,9 @@ class Frame extends JFrame {
 							figFocused = copy;
 						}
 						break;
-
+					case KeyEvent.VK_S:
+						salvar();
+						break;
 					case KeyEvent.VK_I:
 						if (figFocused != null) 
 							figUp(figs.indexOf(figFocused));	
